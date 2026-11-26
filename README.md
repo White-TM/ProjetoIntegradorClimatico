@@ -30,3 +30,14 @@ Projeto extensionista focado na coleta, tratamento, armazenamento e análise ini
 ├── coleta.py                     # Script de extração via API e salvamento do JSON
 ├── banco.py                      # Script de tratamento (pandas) e carga no DuckDB
 └── consultas.sql                 # Consultas SQL dos indicadores/KPIs
+
+## Arquitetura e Tecnologias Planejadas
+- **Fonte:** API Histórica Open-Meteo (`https://archive-api.open-meteo.com/v1/archive`)
+- **Coleta:** Python + `requests` (com preservação do JSON bruto em `dados/`)
+- **Tratamento e Qualidade:** `pandas` (validação de tipos, cobertura de 30 dias e preservação de nulos)
+- **Armazenamento e Análise:** DuckDB + SQL (tabela única `clima_diario` com chave composta `cidade, data`)
+- **Visualização:** Streamlit (3 cartões de KPIs, 2 gráficos diários e tabela de consulta)
+
+## Recorte e Limitações
+- **Localidade:** Cândido Mota, SP (`-22.7464`, `-50.3869`) | **Período:** `01/10/2026` a `30/10/2026` (30 dias).
+- **Limitações:** Dados provenientes de modelos de reanálise em grade espacial (não substituem estações meteorológicas locais na propriedade) e representam diagnóstico histórico retrospectivo, sem caráter de previsão do tempo.
